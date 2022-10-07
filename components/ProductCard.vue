@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div>Nama: {{ name }}</div>
-    <div>Jumlah: {{ amount }}</div>
-    <div>Price: {{ price }}</div>
+    <div>Nama: {{ dataProduct.name }}</div>
+    <div>Jumlah: {{ dataProduct.amount }}</div>
+    <div>Price: {{ dataProduct.price }}</div>
     <button @click="addAmount">Tambah Jumlah 1</button>
     <div>Total: {{ total }}</div>
     <div>Total + PPN {{ totalAfterPPn }}</div>
@@ -11,16 +11,17 @@
 <script>
 export default {
   name: 'ProductCard',
-  data() {
-    return {
-      name: 'Product A',
-      amount: 1,
-      price: 1000,
+  props: {
+    dataProduct: {
+      type: Object,
+      default() {
+        return {}
+      },
     }
   },
   computed: {
     total() {
-      return this.amount * this.price;
+      return this.dataProduct.amount * this.dataProduct.price;
     },
     // PPN 10%
     totalAfterPPn() {
@@ -29,7 +30,8 @@ export default {
   },
   methods: {
     addAmount() {
-      this.amount += 1;
+      // eslint-disable-next-line vue/no-mutating-props
+      this.dataProduct.amount += 1;
     }
   }
 }
