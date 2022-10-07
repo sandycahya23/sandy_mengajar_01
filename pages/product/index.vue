@@ -8,7 +8,15 @@
       :data-product="product"
       @clickProductAmount="addProductAmount"
     />
-    <div>Subtotal: {{subtotal}}</div>
+    <div :class="subtotalClass">Subtotal: {{subtotal}}</div>
+    <p>
+      subtotal &lt; 5000 -> pink<br/>
+      subtotal > 5000 -> red<br/>
+      subtotal > 7000 -> green<br/>
+      subtotal > 8000 -> blue
+    </p>
+    <div v-if="subtotal > 10000">hemat dong!!!</div>
+    <div v-show="subtotal > 15000">Ayo hemat dong!!!</div>
   </div>
 </template>
 <script>
@@ -47,6 +55,24 @@ export default {
       });
       return subtotal;
     },
+    subtotalClass() {
+      // return {
+      //   'bg-red-800': this.subtotal > 5000,
+      //   'bg-green-800': this.subtotal > 7000,
+      //   'bg-blue-800': this.subtotal > 8000,
+      // };
+      let bgClass = '';
+      if (this.subtotal > 8000) {
+        bgClass = 'bg-blue-800';
+      } else if (this.subtotal > 7000) {
+        bgClass = 'bg-green-800';
+      } else if (this.subtotal > 5000) {
+        bgClass = 'bg-red-800';
+      } else {
+        bgClass = 'bg-pink-300';
+      }
+      return bgClass;
+    }
   },
   methods: {
     addProductAmount(id) {
