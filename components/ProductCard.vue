@@ -30,8 +30,7 @@ export default {
   },
   methods: {
     addAmount() {
-      // eslint-disable-next-line vue/no-mutating-props
-      this.dataProduct.amount += 1;
+      this.$emit('clickProductAmount', this.dataProduct.id);
     }
   }
 }

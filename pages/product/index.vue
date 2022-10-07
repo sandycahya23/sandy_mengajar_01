@@ -6,6 +6,7 @@
       v-for="product in listProduct"
       :key="product.id"
       :data-product="product"
+      @clickProductAmount="addProductAmount"
     />
     <div>Subtotal: {{subtotal}}</div>
   </div>
@@ -45,7 +46,13 @@ export default {
         subtotal += product.amount * product.price;
       });
       return subtotal;
-    }
+    },
+  },
+  methods: {
+    addProductAmount(id) {
+      const product = this.listProduct.find(product => product.id ===id);
+      product.amount += 1;
+    },
   }
 }
 </script>
