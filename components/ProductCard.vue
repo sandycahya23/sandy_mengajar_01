@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>Nama: {{ dataProduct.name }}</div>
+    <div>Nama: {{ dataProduct.title }}</div>
     <div>Jumlah: {{ dataProduct.amount }}</div>
     <div>Price: {{ dataProduct.price }}</div>
     <button @click="addAmount">Tambah Jumlah 1</button>

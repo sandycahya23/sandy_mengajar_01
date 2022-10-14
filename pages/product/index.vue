@@ -20,22 +20,13 @@
   </div>
 </template>
 <script>
+// import axios from 'axios';
+
 export default {
   name: 'PageProductA',
   data() {
     return {
-      listProduct: [{
-          id: 1,
-          name: 'Product ABC',
-          amount: 1,
-          price: 1000,
-        },{
-          id: 2,
-          name: 'Product ASD',
-          amount: 1,
-          price: 500,
-        },
-      ]
+      listProduct: [],
     };
   },
   computed: {
@@ -74,7 +65,24 @@ export default {
       return bgClass;
     }
   },
+  mounted() {
+    this.fetchDataProducts();
+  },
   methods: {
+    fetchDataProducts() {
+      this.listProduct = [{
+          id: 1,
+          title: 'Product ABC',
+          amount: 1,
+          price: 1000,
+        },{
+          id: 2,
+          title: 'Product ASD',
+          amount: 1,
+          price: 500,
+        },
+      ]
+    },
     addProductAmount(id) {
       const product = this.listProduct.find(product => product.id ===id);
       product.amount += 1;
