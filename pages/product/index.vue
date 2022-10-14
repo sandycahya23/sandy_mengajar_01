@@ -20,7 +20,7 @@
   </div>
 </template>
 <script>
-// import axios from 'axios';
+import axios from 'axios';
 
 export default {
   name: 'PageProductA',
@@ -70,18 +70,18 @@ export default {
   },
   methods: {
     fetchDataProducts() {
-      this.listProduct = [{
-          id: 1,
-          title: 'Product ABC',
-          amount: 1,
-          price: 1000,
-        },{
-          id: 2,
-          title: 'Product ASD',
-          amount: 1,
-          price: 500,
-        },
-      ]
+      axios.get('https://fakestoreapi.com/products')
+      .then(response => {
+        if (response.status) {
+          this.listProduct = response.data.map((data) => {
+            return { ...data, amount: 1 };
+          });
+        } else {
+          this.listProduct = [];
+          alert('API Error');
+        }
+      });
+      
     },
     addProductAmount(id) {
       const product = this.listProduct.find(product => product.id ===id);
